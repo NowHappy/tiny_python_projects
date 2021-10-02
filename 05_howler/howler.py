@@ -26,9 +26,14 @@ def get_args():
                         help='Output filename',
                         metavar='str',
                         type=argparse.FileType('wt'),
-                        default='')
+                        default=None)
 
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    if os.path.isfile(args.input):
+        args.input = open(args.input).read().rstrip()
+
+    return args
 
 
 # --------------------------------------------------
@@ -36,13 +41,10 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    str_args = args.input
+    str_args = args.input.upper()
     outfile_args = args.outfile
 
-    if os.path.isfile(args.input):
-        str_args = open(str_args).read()
-
-    print(f'{str_args.upper()}', file=outfile_args) if outfile_args else print(f'{str_args.upper()}')
+    print(f'{str_args}', file=outfile_args) if outfile_args else print(f'{str_args}')
 
 
 # --------------------------------------------------
