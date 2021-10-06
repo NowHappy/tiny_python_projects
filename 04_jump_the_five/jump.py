@@ -28,7 +28,6 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    text = args.input
 
     jumper = { '1': '9',
                '2': '8',
@@ -42,9 +41,7 @@ def main():
                '0': '5'
                }
 
-    for char in args.input:
-        print(jumper.get(char, char), end='')
-    print()
+    print(''.join([jumper.get(char, char) for char in args.input]))
 
 
 # --------------------------------------------------
